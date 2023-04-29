@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Example Content</h1>
+
+<button onclick="callEndpoint()">Generate New receive Pacs</button>
+
+<input type="text" id="maincontent" th:value="${content}" >
+<input type="text" id="msgid" th:value="${msgid}" >
+<textarea id="output1" disabled></textarea>
+
+<textarea id="output2"></textarea>
+<textarea id="output3"></textarea>
+<textarea id="output4"></textarea>
+<script>
+function callEndpoint() {
+  console.log("Calling endpoint...");
+       $(document).ready(function() {
+        $.ajax({
+            url: "/api/v1/createmsg",
+            type: "GET",
+            success: function(data) {
+                 console.log(data.content);
+                console.log(data.bizMsgIdr);
+                console.log(data.creDt);
+                console.log(data.msgId);
+                console.log(data.creDtTm);
+                console.log(data.instrId);
+                console.log(data.endToEndId);
+                console.log(data.txId);
+            },
+            error: function() {
+                console.log("Error calling endpoint!");
+                alert("Error calling endpoint!");
+            }
+        });
+    });
+    }
+    </script>
+</body>
+</html>
